@@ -19,31 +19,30 @@
 class Led {
 public:
 	Led(int8_t pin = -1, boolean initial_state = L_OFF);
-	~Led();
+	virtual ~Led() {};
+
+	int8_t pin();
 	boolean state();
 	uint8_t intensityPercent();
 	void setPin(int8_t pin);
-	void toggle(boolean onOff);
+	virtual void toggle(boolean onOff);
 	void toggle();
 	void on();
 	void off();
 	void flash(uint8_t times = 0, uint16_t wait = 0);
-	//void flash();
 	void setFlash(uint8_t times = 3, uint16_t wait = 0);
 	void setIntensityPercent(uint8_t percent = 100);
 	void setFlashSoftness(uint16_t slowness = 0);
-	/*
-	 void bkgSetFlash( int timesOn = 3, int millisOn = -1, int millisOff = -1);
-	 void bkgResetTimer();
-	 void bkgFlash();
-	 */
-private:
+
+protected:
 	boolean _on_off;
 	int8_t _pin;
+	uint8_t _intensity;     // in percent (0 - 100)
+
+private:
 	uint8_t _flash_times;
 	uint16_t _flash_wait;
-	uint8_t _intensity;     // in percent (0 - 100)
-	uint16_t _toggle_slowness;  // milliseconds to toggle
+
 	/*
 	 int _bkg_flash_on_times;
 	 int _bkg_flash_on_wait;
